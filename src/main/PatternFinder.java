@@ -6,6 +6,15 @@ import util.ArithmeticException;
 import java.util.*;
 
 public class PatternFinder {
+    /**
+     * randomStringGenerator is a method that generates and returns a randomly generated string of a given length.
+     * This is done by using the random class from java to generate random integers within a range of 25 and converts
+     * that into a character that gets stored in a character array which then gets passed into the String class
+     * constructor that is returned as a string.
+     *
+     * @param length is the given input length.
+     * @return returns the randomly generated string.
+     */
     private static String randomStringGenerator(int length) {// generates a string made of randomly generated lowercase
         // letters.
         Random random = new Random(System.nanoTime());
@@ -15,6 +24,16 @@ public class PatternFinder {
         return new String(array);
     }
 
+    /**
+     * singletonMiner is the method that looks for a singleton pattern of a given length within a given string. This is
+     * done by iterating character by character and checking if the previous character matches the current character,
+     * if the target length of identical characters is reached then it throws a SingletonException which stores the
+     * substring it found and its starting index.
+     *
+     * @param mine is the given string that is being checked.
+     * @param length is the given length of the pattern we are looking for.
+     * @throws SingletonException is called with, and stores, the substring pattern found and the starting index.
+     */
     private static void singletonMiner(String mine, int length) throws SingletonException {
         for (int start = 0; start <= mine.length() - length; start++) {
             int i;
@@ -26,6 +45,16 @@ public class PatternFinder {
         }
     }
 
+    /**
+     * arithmeticMiner is the method that looks for an arithmetic pattern of a given length within a given string. This
+     * is done by iterating character by character and checking if the previous character is sequential to the current
+     * character, if the target length of arithmetically incrementing characters is reached then it throws an
+     * ArithmeticException which stores the substring it found and its starting index.
+     *
+     * @param mine is the given string that is being checked.
+     * @param length is the given length of the pattern we are looking for.
+     * @throws ArithmeticException is called with, and stores, the substring pattern found and the starting index.
+     */
     private static void arithmeticMiner(String mine, int length) throws ArithmeticException {
         for (int start = 0; start <= mine.length() - length; start++) {
             int i;
@@ -37,6 +66,16 @@ public class PatternFinder {
         }
     }
 
+    /**
+     * invArithmeticMiner is the method that looks for an arithmetic pattern of order -1 of a given length within a
+     * given string. This is done by iterating character by character and checking if the previous character is
+     * sequential to the current character, if the target length of arithmetically decrementing characters is reached
+     * then it throws an InvArithmeticException which stores the substring it found and its starting index.
+     *
+     * @param mine is the given string that is being checked.
+     * @param length is the given length of the pattern we are looking for.
+     * @throws InvArithmeticException is called with, and stores, the substring pattern found and the starting index.
+     */
     private static void invArithmeticMiner(String mine, int length) throws InvArithmeticException {
         for (int start = 0; start <= mine.length() - length; start++) {
             int i;
