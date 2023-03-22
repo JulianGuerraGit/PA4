@@ -30,7 +30,7 @@ public class PatternFinder {
      * if the target length of identical characters is reached then it throws a SingletonException which stores the
      * substring it found and its starting index.
      *
-     * @param mine is the given string that is being checked.
+     * @param mine   is the given string that is being checked.
      * @param length is the given length of the pattern we are looking for.
      * @throws SingletonException is called with, and stores, the substring pattern found and the starting index.
      */
@@ -51,7 +51,7 @@ public class PatternFinder {
      * character, if the target length of arithmetically incrementing characters is reached then it throws an
      * ArithmeticException which stores the substring it found and its starting index.
      *
-     * @param mine is the given string that is being checked.
+     * @param mine   is the given string that is being checked.
      * @param length is the given length of the pattern we are looking for.
      * @throws ArithmeticException is called with, and stores, the substring pattern found and the starting index.
      */
@@ -72,7 +72,7 @@ public class PatternFinder {
      * sequential to the current character, if the target length of arithmetically decrementing characters is reached
      * then it throws an InvArithmeticException which stores the substring it found and its starting index.
      *
-     * @param mine is the given string that is being checked.
+     * @param mine   is the given string that is being checked.
      * @param length is the given length of the pattern we are looking for.
      * @throws InvArithmeticException is called with, and stores, the substring pattern found and the starting index.
      */
@@ -87,6 +87,16 @@ public class PatternFinder {
         }
     }
 
+    /**
+     * balTripartiteMiner is the method that looks for a balanced tripartite pattern of a given length within a
+     * given string. This is done by iterating character by character and splitting the string into 3 even subsections
+     * and comparing if they are equal, if the three substrings are equal then it throws a BalTripartiteException
+     * which stores the substring it found and its starting index.
+     *
+     * @param mine   is the given string that is being checked.
+     * @param length is the given length of the pattern we are looking for.
+     * @throws BalTripartiteException is called with, and stores, the substring pattern found and the starting index.
+     */
     private static void balTripartiteMiner(String mine, int length) throws BalTripartiteException {
 
         if (length % 3 != 0)
@@ -102,6 +112,16 @@ public class PatternFinder {
 
     }
 
+    /**
+     * balBipartiteMiner is the method that looks for a balanced Bipartite pattern of a given length within a
+     * given string. This is done by iterating character by character and splitting the string into 2 even subsections
+     * and comparing if they are equal, if the two substrings are equal then it throws a BalBipartiteException
+     * which stores the substring it found and its starting index.
+     *
+     * @param mine   is the given string that is being checked.
+     * @param length is the given length of the pattern we are looking for.
+     * @throws BalBipartiteException is called with, and stores, the substring pattern found and the starting index.
+     */
     private static void balBipartiteMiner(String mine, int length) throws BalBipartiteException {
 
         if (length % 2 != 0)
@@ -116,6 +136,17 @@ public class PatternFinder {
 
     }
 
+    /**
+     * palindromeMiner is the method that looks for a palindrome pattern of a given length within given string.
+     * This is done by iterating character by character and using two pointers to compare the characters from each end
+     * of the string moving inwards until the pointers meet or cross each other, if the two characters being compared
+     * are ever not equal then it sets isPalindrome to false and the exception is not called. If the flag is never
+     * set to false then it calls PalindromeException which stores the substring it found and its starting index.
+     *
+     * @param mine   is the given string that is being checked.
+     * @param length is the given length of the pattern we are looking for.
+     * @throws PalindromeException is called with, and stores, the substring pattern found and the starting index.
+     */
     private static void palindromeMiner(String mine, int length) throws PalindromeException {
 
         for (int start = 0; start <= mine.length() - length; start++) {
@@ -143,7 +174,7 @@ public class PatternFinder {
         int randomStringLength = keyboard.nextInt();
         while (true) {
             try {
-                if (randomStringLength < 100000 || randomStringLength > 1000000000)
+                if (randomStringLength < 100000 || randomStringLength > 1000000000) // throws NumberFormatException if not in the valid range.
                     throw new NumberFormatException();
             } catch (NumberFormatException e) {
                 System.out.println("Try again!");
@@ -157,7 +188,7 @@ public class PatternFinder {
         int patternMaxLength = keyboard.nextInt();
         while (true) {
             try {
-                if (patternMaxLength < 3 || patternMaxLength > 15)
+                if (patternMaxLength < 3 || patternMaxLength > 15) // throws NumberFormatException if not in the valid range.
                     throw new NumberFormatException();
             } catch (NumberFormatException e) {
                 System.out.println("Try again!");
@@ -167,9 +198,9 @@ public class PatternFinder {
             break;
         }
         //Step 2: generating random string...
-        String randomString = randomStringGenerator(10000);
+        String randomString = randomStringGenerator(randomStringLength);
         //Step 3: finding the interesting patterns
-        try {
+        try { // checks for patterns of length = patternMaxLength in order of decreasing rarity and decrements length by 1 if none are found before looping
             for (int length = patternMaxLength; length > 0; length--) {
                 singletonMiner(randomString, length);
                 arithmeticMiner(randomString, length);
@@ -179,7 +210,7 @@ public class PatternFinder {
                 palindromeMiner(randomString, length);
             }
         } catch (Exception exp) {
-            System.out.println(exp.getMessage());
+            System.out.println(exp.getMessage()); // prints the exception message when an exception is called
         }
     }
 }

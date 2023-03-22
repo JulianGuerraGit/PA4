@@ -1,6 +1,6 @@
 package util;
 
-public class SingletonException extends Exception {//e.g. "bbbbbbb", "mmmm", "nn"
+public class SingletonException extends Exception {
     private String singletonString;
     private int occurrenceIndex;
 
